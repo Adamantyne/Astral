@@ -1,10 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController ControllerInstance;
+    public GameObject PauseMenu;
+
+    public void Awake(){
+        ControllerInstance = this;
+    }
+
     public void QuitGame(){
         Application.Quit();
     }
@@ -12,15 +17,16 @@ public class GameController : MonoBehaviour
     public void LoadScennes(string _Scene){
         SceneManager.LoadScene(_Scene);
     }
-
-    void Start()
-    {
-        
+    public void PauseGame(){
+        if(Time.timeScale==0f){
+            Time.timeScale=1f;
+        }else{
+            Time.timeScale=0f;
+        }
+        PauseMenuController(Time.timeScale==0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void PauseMenuController(bool _status){
+        PauseMenu.SetActive(_status);
     }
 }

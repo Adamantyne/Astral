@@ -16,6 +16,7 @@ public class PlayerController : Character
     private int InitialLife;
     public static PlayerController PlayerInstance;
     public int test = 1;
+    [SerializeField] private int currentStage = 1;
 
     #endregion
 
@@ -49,9 +50,13 @@ public class PlayerController : Character
         bool FPress = Input.GetKeyDown ("f");
         bool JumpPress = Input.GetButtonDown("Jump");
         bool LeftMouseDown = Input.GetMouseButtonDown (0);
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
         if(Alive){
             InputActions(MoveX, MoveY, FPress, WPress, JumpPress);
-        } 
+        }
+        if(pause){
+            GameController.ControllerInstance.PauseGame();
+        }
     }
 
     public void InputActions(float MoveX, float MoveY, bool FPress, bool WPress, bool JumpPress){
@@ -61,6 +66,7 @@ public class PlayerController : Character
         if(FPress){
             this.GravityOn = !GravityOn;
             GravityControll(GravityOn);
+            ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
         }
         if((WPress || JumpPress)){
             Jump(jumpHeight);
@@ -148,6 +154,9 @@ public class PlayerController : Character
     void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Obstacle")){
             TakeDamage();
+        }else if(other.CompareTag("Goal")){
+            int _nextStage = currentStage+1;
+            GameController.ControllerInstance.LoadScennes("Stage_"+_nextStage);
         }
     }
 
