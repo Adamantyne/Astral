@@ -104,6 +104,7 @@ public class PlayerController : Character
         }else{
             Body.velocity = new Vector2(0,0);
             Body.gravityScale = 0;
+            AudioController.AudioControllerInstance.PlayAudio("playerGravity");
         }
     }
 
@@ -116,6 +117,7 @@ public class PlayerController : Character
             Body.velocity = new Vector2(Body.velocity.x, 0);
             Body.velocity = new Vector2(Body.velocity.x, _height);
             JumpCount--;
+            AudioController.AudioControllerInstance.PlayAudio("playerJump");
         }
     }
 
@@ -140,6 +142,8 @@ public class PlayerController : Character
         Alive = false;
         SpawnBody();
         life = InitialLife;
+        AudioController.AudioControllerInstance.PlayAudio("playerDead");
+        ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
     }
 
     protected override void SpawnBody(){
