@@ -15,7 +15,6 @@ public class PlayerController : Character
     [SerializeField] private int life = 1;
     private int InitialLife;
     public static PlayerController PlayerInstance;
-    public int test = 1;
     [SerializeField] private int currentStage = 1;
 
     #endregion
