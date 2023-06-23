@@ -160,7 +160,7 @@ public class PlayerController : Character
             TakeDamage();
         }else if(other.CompareTag("Goal")){
             int _nextStage = currentStage+1;
-            GameController.ControllerInstance.LoadScennes("Stage_"+_nextStage);
+            GameController.ControllerInstance.LoadScennes("Menu");
         }
     }
 
