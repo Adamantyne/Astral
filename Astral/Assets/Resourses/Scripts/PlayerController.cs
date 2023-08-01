@@ -45,7 +45,7 @@ public class PlayerController : Character
 
     public void Inputs ()
     {
-        float MoveX = Input.GetAxisRaw ("Horizontal");         
+        float MoveX = Input.GetAxisRaw ("Horizontal");       
         float MoveY = Input.GetAxisRaw ("Vertical");
         bool WPress = Input.GetKeyDown ("w");
         bool FPress = Input.GetKeyDown ("f");
