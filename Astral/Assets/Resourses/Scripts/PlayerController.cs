@@ -35,7 +35,6 @@ public class PlayerController : Character
     {
         base.Update();
         RestoreJump();
-        Inputs();
         Flip();
     }
 
@@ -43,24 +42,9 @@ public class PlayerController : Character
 
     #region Inputs Controller
 
-    public void Inputs ()
-    {
-        float MoveX = Input.GetAxisRaw ("Horizontal");       
-        float MoveY = Input.GetAxisRaw ("Vertical");
-        bool WPress = Input.GetKeyDown ("w");
-        bool FPress = Input.GetKeyDown ("f");
-        bool JumpPress = Input.GetButtonDown("Jump");
-        bool LeftMouseDown = Input.GetMouseButtonDown (0);
-        bool pause = Input.GetKeyDown(KeyCode.Escape);
-        if(Alive){
-            InputActions(MoveX, MoveY, FPress, WPress, JumpPress);
-        }
-        if(pause){
-            GameController.ControllerInstance.PauseGame();
-        }
-    }
-
+    
     public void InputActions(float MoveX, float MoveY, bool FPress, bool WPress, bool JumpPress){
+        if(!Alive) return;
         if((MoveX!=0 || MoveY!=0)){
             PlayerMove(MoveX, MoveY);
             animator.SetBool ("Running", true);
