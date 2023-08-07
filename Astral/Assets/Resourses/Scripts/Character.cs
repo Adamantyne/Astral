@@ -61,10 +61,6 @@ public class Character : MonoBehaviour
     protected virtual void SpawnBody(){
         Body.velocity = new Vector2(0,0);
         Body.position = spawnPoint.position;
-        if(!GravityOn){
-            GravityOn = true;
-        }
-        Body.gravityScale = this.gravity;
     }
 
     protected bool InFloor(){

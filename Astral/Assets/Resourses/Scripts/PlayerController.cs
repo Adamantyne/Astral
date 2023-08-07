@@ -5,18 +5,23 @@ public class PlayerController : Character
     #region Variables
 
     [Header ("Física do jogador")]
-    [HideInInspector] private bool Alive = true;
     [SerializeField] private float jumpHeight = 15;
     [SerializeField] private int totalJump = 1;
-    //[SerializeField] private float jumpSpeedDecrement = 10;
     private int JumpCount;
+    //[SerializeField] private float jumpSpeedDecrement = 10;
 
     [Header ("Dados do jogador")]
+    [HideInInspector] private bool Alive = true;
     private Animator animator;
+    [SerializeField] private Collider2D collider;
     [SerializeField] private int life = 1;
     private int InitialLife;
     public static PlayerController PlayerInstance;
+
+    [Header ("Informações adicionais")]
     [SerializeField] private int currentStage = 1;
+    public Transform spawnPointPosition;
+    public float ghostSpeed;
 
     #endregion
 
@@ -24,10 +29,10 @@ public class PlayerController : Character
 
     protected override void Awake(){
         base.Awake();
+        PlayerInstance = this;
         InitialLife = life;
         JumpCount = totalJump;
         InitialLife = life;
-        PlayerInstance = this;
         this.animator = GetComponent<Animator> ();
     }
 
@@ -36,6 +41,9 @@ public class PlayerController : Character
         base.Update();
         RestoreJump();
         Flip();
+        if(!Alive){
+            GhostMode();
+        }
     }
 
     #endregion
@@ -52,8 +60,7 @@ public class PlayerController : Character
             animator.SetBool ("Running", false);
         }
         if(FPress){
-            this.GravityOn = !GravityOn;
-            GravityControll(GravityOn);
+            SetGravityStatus(!GravityOn);
             ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
             RotatePlayer(0);
         }
@@ -99,13 +106,18 @@ public class PlayerController : Character
         }
     }
 
-    public void GravityControll(bool isOn){
+    public void SetGravityStatus(bool _status , bool playAudio = true){
+        GravityOn = _status;
+        GravityControll(GravityOn, playAudio);
+    }
+
+    public void GravityControll(bool isOn, bool playAudio){
         if(isOn){
             Body.gravityScale = this.gravity;
         }else{
             Body.velocity = new Vector2(0,0);
             Body.gravityScale = 0;
-            AudioController.AudioControllerInstance.PlayAudio("playerGravity");
+            if(playAudio) AudioController.AudioControllerInstance.PlayAudio("playerGravity");
         }
     }
 
@@ -141,14 +153,24 @@ public class PlayerController : Character
 
     public void Dead(){
         Alive = false;
+        SetGravityStatus(false, false);
         RotatePlayer(0);
-        SpawnBody();
-        life = InitialLife;
         AudioController.AudioControllerInstance.PlayAudio("playerDead");
         ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
+        collider.enabled = false;
+    }
+
+    public void GhostMode(){
+        transform.position = Vector2.MoveTowards(transform.position, spawnPointPosition.position, ghostSpeed*Time.deltaTime);
+        if(transform.position == spawnPointPosition.position) SpawnBody();
+ 
     }
 
     protected override void SpawnBody(){
+        collider.enabled = true;
+        SetGravityStatus(true);
+        Body.gravityScale = this.gravity;
+        life = InitialLife;
         if(!Alive)Alive = true;
         base.SpawnBody();
     }

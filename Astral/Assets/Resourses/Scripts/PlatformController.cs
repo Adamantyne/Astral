@@ -26,7 +26,6 @@ public class PlatformController : MonoBehaviour
     }
 
     void MovmentPlatform(Vector2 target){
-        //platform.position = Vector2.Lerp(platform.position, target, speed*Time.deltaTime);
         platform.position = Vector2.MoveTowards(platform.position, target, speed*Time.deltaTime);
     }
 
