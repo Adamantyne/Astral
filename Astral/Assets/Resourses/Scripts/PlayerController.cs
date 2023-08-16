@@ -7,16 +7,21 @@ public class PlayerController : Character
     [Header ("Física do jogador")]
     [SerializeField] private float jumpHeight = 15;
     [SerializeField] private int totalJump = 1;
+    [SerializeField] private int gravitySpeedIncrement = 10;
     private int JumpCount;
     //[SerializeField] private float jumpSpeedDecrement = 10;
 
     [Header ("Dados do jogador")]
     [HideInInspector] private bool Alive = true;
-    private Animator animator;
     [SerializeField] private Collider2D collider;
     [SerializeField] private int life = 1;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform footPosition;
+    [SerializeField] private LayerMask floorLayer;
+    [SerializeField] private float floorDistance = 0.2f;
     private int InitialLife;
     public static PlayerController PlayerInstance;
+    
 
     [Header ("Informações adicionais")]
     [SerializeField] private int currentStage = 1;
@@ -33,7 +38,8 @@ public class PlayerController : Character
         InitialLife = life;
         JumpCount = totalJump;
         InitialLife = life;
-        this.animator = GetComponent<Animator> ();
+        this.Animator = GetComponent<Animator> ();
+        SpawnBody();
     }
 
     protected override void Update()
@@ -55,9 +61,9 @@ public class PlayerController : Character
         if(!Alive) return;
         if((MoveX!=0 || MoveY!=0)){
             PlayerMove(MoveX, MoveY);
-            animator.SetBool ("Running", true);
+            Animator.SetBool ("Running", true);
         }else{
-            animator.SetBool ("Running", false);
+            Animator.SetBool ("Running", false);
         }
         if(FPress){
             SetGravityStatus(!GravityOn);
@@ -85,6 +91,12 @@ public class PlayerController : Character
         var rotationVector = transform.rotation.eulerAngles;
         rotationVector.z = _rotationValue * RotateIndex;
         transform.rotation = Quaternion.Euler(rotationVector);
+    }
+
+    protected override void Flip(){
+        if((transform.localScale.x>0 && Body.velocity.x<0) || (transform.localScale.x<0 && Body.velocity.x>0)){
+            base.Flip();
+        }
     }
 
     #endregion
@@ -151,6 +163,10 @@ public class PlayerController : Character
         }
     }
 
+    private bool InFloor(){
+        return Physics2D.OverlapCircle(footPosition.position, floorDistance, floorLayer);
+    }
+
     public void Dead(){
         Alive = false;
         SetGravityStatus(false, false);
@@ -166,13 +182,14 @@ public class PlayerController : Character
  
     }
 
-    protected override void SpawnBody(){
+    protected void SpawnBody(){
         collider.enabled = true;
         SetGravityStatus(true);
         Body.gravityScale = this.gravity;
         life = InitialLife;
         if(!Alive)Alive = true;
-        base.SpawnBody();
+        Body.velocity = new Vector2(0,0);
+        Body.position = spawnPoint.position;
     }
 
     #endregion
@@ -180,7 +197,7 @@ public class PlayerController : Character
     #region Trigger Controller
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.CompareTag("Obstacle")){
+        if(other.CompareTag("Obstacle") || other.CompareTag("Enemy")){
             TakeDamage();
         }else if(other.CompareTag("Goal")){
             int _nextStage = currentStage+1;
