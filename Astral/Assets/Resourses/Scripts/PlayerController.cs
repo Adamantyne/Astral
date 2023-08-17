@@ -68,8 +68,6 @@ public class PlayerController : Character
         }
         if(FPress){
             SetGravityStatus(!GravityOn);
-            ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
-            RotatePlayer(0);
         }
         if((WPress || JumpPress)){
             Jump(jumpHeight);
@@ -121,8 +119,11 @@ public class PlayerController : Character
     }
 
     public void SetGravityStatus(bool _status , bool playAudio = true){
+        if(GravityOn && !InFloor()) return;
         GravityOn = _status;
         GravityControll(GravityOn, playAudio);
+        ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
+        RotatePlayer(0);
     }
 
     public void GravityControll(bool isOn, bool playAudio){
