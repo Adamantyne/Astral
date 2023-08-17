@@ -44,5 +44,11 @@ public class Character : MonoBehaviour
         transform.localScale = _localScale;
     }
 
+    protected virtual void SetFlip(float _value){
+        Vector2 _localScale = transform.localScale;
+        _localScale.x =_value;
+        transform.localScale = _localScale;
+    }
+
     #endregion
 }

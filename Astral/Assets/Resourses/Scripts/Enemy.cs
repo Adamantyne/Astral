@@ -11,7 +11,6 @@ public class Enemy : Character
         if(Body.velocity.x == 0) {
             direction*=-1;
             Flip();
-            Debug.Log(Body.velocity.x);
         }
         Move(direction);
     }

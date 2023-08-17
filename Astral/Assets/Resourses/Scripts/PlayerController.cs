@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerController : Character
 {
@@ -94,6 +95,7 @@ public class PlayerController : Character
     }
 
     protected override void Flip(){
+        if(Alive == false) return;
         if((transform.localScale.x>0 && Body.velocity.x<0) || (transform.localScale.x<0 && Body.velocity.x>0)){
             base.Flip();
         }
@@ -169,6 +171,7 @@ public class PlayerController : Character
 
     public void Dead(){
         Alive = false;
+        Animator.SetBool ("Dead", true);
         SetGravityStatus(false, false);
         RotatePlayer(0);
         AudioController.AudioControllerInstance.PlayAudio("playerDead");
@@ -178,13 +181,23 @@ public class PlayerController : Character
 
     public void GhostMode(){
         transform.position = Vector2.MoveTowards(transform.position, spawnPointPosition.position, ghostSpeed*Time.deltaTime);
+        SetGhostDirection();
         if(transform.position == spawnPointPosition.position) SpawnBody();
- 
+    }
+
+    public void SetGhostDirection(){
+        float scale = Math.Abs(transform.localScale.x);
+        if(transform.position.x > spawnPoint.position.x){
+            base.SetFlip(scale);
+        }else if (transform.position.x < spawnPoint.position.x){
+            base.SetFlip(-scale);
+        }
     }
 
     protected void SpawnBody(){
         collider.enabled = true;
         SetGravityStatus(true);
+        Animator.SetBool ("Dead", false);
         Body.gravityScale = this.gravity;
         life = InitialLife;
         if(!Alive)Alive = true;
