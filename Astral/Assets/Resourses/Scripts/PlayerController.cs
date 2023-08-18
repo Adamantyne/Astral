@@ -119,7 +119,7 @@ public class PlayerController : Character
     }
 
     public void SetGravityStatus(bool _status , bool playAudio = true){
-        if(GravityOn && !InFloor()) return;
+        if(GravityOn && !InFloor() && Alive) return;
         GravityOn = _status;
         GravityControll(GravityOn, playAudio);
         ItensController.itenInstance.SetItemStatus("Gravity",!GravityOn);
