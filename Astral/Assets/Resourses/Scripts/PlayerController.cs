@@ -181,9 +181,22 @@ public class PlayerController : Character
     }
 
     public void GhostMode(){
-        transform.position = Vector2.MoveTowards(transform.position, spawnPointPosition.position, ghostSpeed*Time.deltaTime);
+
+        transform.position = Vector2.MoveTowards(transform.position, spawnPointPosition.position, ghostSpeed*setGhostVelocityIncrement()*Time.deltaTime);
         SetGhostDirection();
         if(transform.position == spawnPointPosition.position) SpawnBody();
+    }
+
+    public float setGhostVelocityIncrement(){
+        float incremetController = 10;
+        int minIncrement = 1;
+        int maxIncrement = 4;
+
+        float _distance = Math.Abs(transform.position.x - spawnPoint.transform.position.x);
+
+        float _incrementedVelocity = _distance/incremetController > maxIncrement ? maxIncrement : _distance/incremetController > minIncrement ? _distance/incremetController : minIncrement;
+
+        return _incrementedVelocity;
     }
 
     public void SetGhostDirection(){
