@@ -51,6 +51,7 @@ public class InputController : MonoBehaviour
 
     public void SetGravityStatus()
     {
+        if(!PlayerController.PlayerInstance.GetIsAlive()) return;
         PlayerController.PlayerInstance.SetGravityStatus(!PlayerController.PlayerInstance.GetGravityStatus());
     }
 
