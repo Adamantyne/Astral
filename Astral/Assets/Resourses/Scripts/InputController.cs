@@ -14,26 +14,30 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
+        if (moveX != 0 || moveY != 0) usingMobile = true;
         SendInputs();
         KeyInputs();
     }
 
     public void KeyInputs()
     {
-        if(usingMobile) return;
+        if (usingMobile) return;
         float keyMoveX = Input.GetAxisRaw("Horizontal");
         float keyMoveY = Input.GetAxisRaw("Vertical");
         bool keyGravtyPress = Input.GetKeyDown("f");
         bool keyPausePress = Input.GetKeyDown(KeyCode.Escape);
         bool keyJumpPress = Input.GetButtonDown("Jump");
         bool LeftMouseDown = Input.GetMouseButtonDown(0);
-        if(keyPausePress){
+        if (keyPausePress)
+        {
             SetPauseStatus();
         }
-        if(keyGravtyPress){
+        if (keyGravtyPress)
+        {
             SetGravityStatus();
         }
-        if(keyJumpPress){
+        if (keyJumpPress)
+        {
             keyMoveY = 1;
         }
         PlayerController.PlayerInstance.InputActions(keyMoveX, keyMoveY);
@@ -51,7 +55,7 @@ public class InputController : MonoBehaviour
 
     public void SetGravityStatus()
     {
-        if(!PlayerController.PlayerInstance.GetIsAlive()) return;
+        if (!PlayerController.PlayerInstance.GetIsAlive()) return;
         PlayerController.PlayerInstance.SetGravityStatus(!PlayerController.PlayerInstance.GetGravityStatus());
     }
 
@@ -60,7 +64,8 @@ public class InputController : MonoBehaviour
         GameController.ControllerInstance.PauseGame();
     }
 
-    private void SendInputs(){
+    private void SendInputs()
+    {
         PlayerController.PlayerInstance.InputActions(moveX, moveY);
     }
 }

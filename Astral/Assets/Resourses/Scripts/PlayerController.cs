@@ -39,7 +39,7 @@ public class PlayerController : Character
         InitialLife = life;
         JumpCount = totalJump;
         InitialLife = life;
-        this.Animator = GetComponent<Animator> ();
+        Animator = GetComponent<Animator> ();
         SpawnBody();
     }
 
