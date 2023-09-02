@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 8907196642624875505}
   - component: {fileID: 8907196642624875504}
   - component: {fileID: 8907196642624875510}
-  - component: {fileID: 8907196642624875507}
   - component: {fileID: 8907196642624875516}
   - component: {fileID: 8907196642624875517}
+  - component: {fileID: 5057473767759644502}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -160,7 +160,7 @@ MonoBehaviour:
   jumpHeight: 15
   totalJump: 1
   gravitySpeedIncrement: 10
-  collider: {fileID: 8907196642624875507}
+  Collider: {fileID: 5057473767759644502}
   life: 1
   spawnPoint: {fileID: 0}
   footPosition: {fileID: 8907196641044698085}
@@ -171,22 +171,6 @@ MonoBehaviour:
   currentStage: 0
   spawnPointPosition: {fileID: 0}
   ghostSpeed: 10
---- !u!58 &8907196642624875507
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8907196642624875509}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.23020534}
-  serializedVersion: 2
-  m_Radius: 0.38489774
 --- !u!251 &8907196642624875516
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -226,3 +210,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &5057473767759644502
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8907196642624875509}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0010489225, y: 0.19141501}
+  serializedVersion: 2
+  m_Radius: 0.24381
