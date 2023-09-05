@@ -14,7 +14,7 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        if (moveX != 0 || moveY != 0) usingMobile = true;
+        usingMobile = (moveX != 0 || moveY != 0) ? true: false;
         SendInputs();
         KeyInputs();
     }
