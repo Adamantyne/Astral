@@ -888,6 +888,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PauseGame
       objectReference: {fileID: 0}
+    - target: {fileID: 2298102068171351781, guid: ebfa84120ea3451479a40b33087b1486, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2298102068171351782, guid: ebfa84120ea3451479a40b33087b1486, type: 3}
       propertyPath: m_Pivot.x
       value: 0
