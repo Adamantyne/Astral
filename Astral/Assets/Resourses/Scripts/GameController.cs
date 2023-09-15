@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 
     public void Awake(){
         ControllerInstance = this;
+        PlayGame();
     }
 
     public void QuitGame(){
@@ -24,6 +25,12 @@ public class GameController : MonoBehaviour
             Time.timeScale=0f;
         }
         PauseMenuController(Time.timeScale==0f);
+    }
+
+    private void PlayGame(){
+        if(Time.timeScale==0f){
+            Time.timeScale=1f;
+        }
     }
 
     void PauseMenuController(bool _status){

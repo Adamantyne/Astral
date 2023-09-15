@@ -185,7 +185,7 @@ public class PlayerController : Character
 
     public void Jump(float _height)
     {
-        if (this.GravityOn && JumpCount > 0 && InFloor())
+        if (GravityOn && JumpCount > 0 && InFloor())
         {
             Body.velocity = new Vector2(Body.velocity.x, 0);
             Body.velocity = new Vector2(Body.velocity.x, _height);
@@ -303,7 +303,7 @@ public class PlayerController : Character
         }
         else if (other.CompareTag("Goal"))
         {   
-            
+
             PhasesCache.PhasesCacheInstance.SetPhaseCompleted(currentStage);
             int _nextStage = currentStage + 1;
             GameController.ControllerInstance.LoadScennes("Phase_" + _nextStage);
