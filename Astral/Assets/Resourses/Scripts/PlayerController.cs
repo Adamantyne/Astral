@@ -156,7 +156,7 @@ public class PlayerController : Character
         if (GravityOn && !InFloor() && Alive) return;
         GravityOn = status;
         GravityControll(GravityOn, playAudio);
-        ItensController.itenInstance.SetItemStatus("Gravity", !GravityOn);
+
         RotatePlayer(0);
     }
 
@@ -164,13 +164,15 @@ public class PlayerController : Character
     {
         if (isOn)
         {
-            Body.gravityScale = this.gravity;
+            Body.gravityScale = gravity;
+            ColorController.ColorInstance.SetImageColor(ColorController.ColorInstance.standardColor);
         }
         else
         {
             Body.velocity = new Vector2(0, 0);
             Body.gravityScale = 0;
             if (playAudio) AudioController.AudioControllerInstance.PlayAudio("playerGravity");
+            ColorController.ColorInstance.SetImageColor(ColorController.ColorInstance.selectedColor);
         }
     }
 
@@ -232,7 +234,7 @@ public class PlayerController : Character
         SetGravityStatus(false, false);
         RotatePlayer(0);
         AudioController.AudioControllerInstance.PlayAudio("playerDead");
-        ItensController.itenInstance.SetItemStatus("Gravity", !GravityOn);
+
         Collider.enabled = false;
     }
 
@@ -302,7 +304,7 @@ public class PlayerController : Character
             TakeDamage();
         }
         else if (other.CompareTag("Goal"))
-        {   
+        {
 
             PhasesCache.PhasesCacheInstance.SetPhaseCompleted(currentStage);
             int _nextStage = currentStage + 1;
