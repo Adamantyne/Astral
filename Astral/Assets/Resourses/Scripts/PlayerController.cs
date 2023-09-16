@@ -308,7 +308,14 @@ public class PlayerController : Character
 
             PhasesCache.PhasesCacheInstance.SetPhaseCompleted(currentStage);
             int _nextStage = currentStage + 1;
-            GameController.ControllerInstance.LoadScennes("Phase_" + _nextStage);
+            if (_nextStage > 4)
+            {
+                GameController.ControllerInstance.LoadScennes("Menu");
+            }
+            else
+            {
+                GameController.ControllerInstance.LoadScennes("Phase_" + _nextStage);
+            }
         }
     }
 
