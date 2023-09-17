@@ -8,9 +8,9 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        usingMobile = (moveX != 0 || moveY != 0) ? true: false;
+        //usingMobile = (moveX != 0 || moveY != 0) ? true: false;
+        //KeyInputs();
         SendInputs();
-        KeyInputs();
     }
 
     public void KeyInputs()

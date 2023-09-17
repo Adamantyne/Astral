@@ -153,6 +153,9 @@ public class PlayerController : Character
 
     public void SetGravityStatus(bool status, bool playAudio = true)
     {
+        if(Alive && !InFloor()){
+            if(!InWall()) return;
+        }
         if (GravityOn && !InFloor() && Alive) return;
         GravityOn = status;
         GravityControll(GravityOn, playAudio);
