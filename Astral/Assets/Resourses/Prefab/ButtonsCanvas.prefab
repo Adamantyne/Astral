@@ -816,6 +816,7 @@ RectTransform:
   - {fileID: 6411455130439303519}
   - {fileID: 6411455130971272626}
   - {fileID: 908162057299764562}
+  - {fileID: 4884167504570741564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1686,6 +1687,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7963556652109894399}
+        m_TargetAssemblyTypeName: loadBanner, Assembly-CSharp
+        m_MethodName: LoadBanner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6411455130971272630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,3 +2077,76 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1001 &7663848365159507288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6411455130145928206}
+    m_Modifications:
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.322193
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8400075
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3105863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855587776847716224, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+      propertyPath: m_Name
+      value: ADSController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+--- !u!4 &4884167504570741564 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2995871271536531044, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+  m_PrefabInstance: {fileID: 7663848365159507288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7963556652109894399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 351080585403299751, guid: 53b4c030ef289a848b5b7994089b6c51, type: 3}
+  m_PrefabInstance: {fileID: 7663848365159507288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206f963220dde2048ae4b6187df821a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
